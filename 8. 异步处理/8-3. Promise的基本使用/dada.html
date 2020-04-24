@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function biaobai(girl){
+        return new Promise(resolve => {
+            console.log(`向女生${girl}表白`);
+            setTimeout(() => {
+                if(Math.random() < 0.5){
+                    resolve(true);
+                }else{
+                    resolve(false);
+                }
+            },1000)
+        })
+    }
+    biaobai('小雨').then(data => {
+        console.log(data);
+    })
+</script>
+</html>

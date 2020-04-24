@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /**
+     * 1.没有字面量
+     * 2.typeof ---> symbol
+     * 3.可以作为对象的属性名
+     *  3.1不可轻易被访问
+     *  3.2不可通过for in 枚举
+     *  3.3 Object.keys不可 but Object.getOwnPropertySymbols方法可以
+     * 4.无法被隐式转换
+    */
+
+    //创建符号 判断是否相等
+    const syb1 = Symbol('syb1');
+    const syb2 = Symbol('syb2');
+    console.log(syb1 === syb2)
+
+    //定义对象
+    let hero1 = {
+        attack:300,
+        hp:50,
+        defence:10,
+        gongji(){
+            //伤害：攻击力*随机数
+            return this.attack * getRandom(0.8, 1.1);
+        },
+        getRandom(min, max){
+            return Math.random()*(max - min) + min
+        }
+    }
+
+    //改为类
+    class Hero{
+        constructor(attack, hp, defence){
+            this.attack = 300;
+            this.hp = 50;
+            this.defence = 10;
+        }
+
+        gongji(){
+            return this.attack * this.getRandom(0.8, 1.1);
+        }
+
+        getRandom(min, max){
+            return Math.random()*(max - min) + min;
+        
+        }
+    }
+    const hero2 = new Hero();
+    
+    //符号作为对象的属性
+    const obj = {
+        a : 1,
+        b : 2,
+        [syb1] : 3
+    }
+
+    let Hero3 = (function(){
+        let syb3 = Symbol('getRandom');
+        return class{
+            constructor(attack, hp, defence){
+                this.attack = attack;
+                this.hp = hp;
+                this.defence = defence;
+                }
+                //伤害 = 攻击力 * 随机数
+                gongji(){
+                    return this.attack * this[syb1](0.8, 1.1)
+                }
+                [syb1](min, max){
+                    return Math.random() * (max - min) + min;
+                }
+        }
+    }());
+    let hro3 = new Hero3(3,6,3);
+    const sybs = Object.getOwnPropertySymbols(Hero3.prototype);
+    const prop = sybs[0];
+    console.log(hro3[prop](3,5))
+</script>
+</html>

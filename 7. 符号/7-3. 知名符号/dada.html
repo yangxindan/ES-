@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class Person{
+        [Symbol.toStringTag] = '3'
+    }
+    const p = new Person();
+    const arr = [1, 2, 3, '5'];
+    console.log(Object.prototype.toString.apply(arr))
+
+    function A(){
+
+    };
+    Object.defineProperty(A, Symbol.hasInstance, {
+        value(obj){
+            return false;
+        }
+    });
+    const obj = new A();
+    console.log(A instanceof obj)
+</script>
+</html>

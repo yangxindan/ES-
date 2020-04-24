@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function biaobai(){
+        return new Promise(resolve => {
+            setTimeout(() => {
+                if(Math.random() < 0.3){
+                    resolve(true)
+                }else{
+                    resolve(false)
+                }
+            },3000)
+        })
+    }
+    const girls = ['girls1','girls2','girls3','girls4','girls5'];
+    let pro,
+        len = girls.length;
+    for(let i = 0; i < len; i++){
+        if(i === 0){
+            pro = biaobai(girls[i]);
+        }
+        pro.then(resp => {
+            if(resp == undefined){
+                return;
+            }else if(resp){
+                console.log(`向${girls[i]}表白成功`);
+                return;
+            }else{
+                console.log(`向${girls[i]}表白失败`);
+                if(i < (len - 1)){
+                    return biaobai(girls[i + 1]);
+                }
+
+            }
+        })
+    }
+</script>
+</html>

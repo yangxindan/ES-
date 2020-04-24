@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /**
+     * //async await 是为了简化Promise API并非取代
+     * 1.async是简化在函数值中对Promise 的创建
+     * 2.await 关键字必须出仙在async函数中
+     * 3.await用在某个函数表达式之前 如果表达式是一个Promise对象，则得到是thenable的状态数据\如果await的表达式不是Promise，则会将其使用Promise.resolve包装后按照规则运行
+     * 
+    */
+
+    //  简化函数返回值中对promise的创建
+   async function test1(){
+       console.log('async');
+       return 5;
+   }
+   const pro = test1();
+   pro.then(res => {
+       console.log(res)
+   })
+
+   async function test2(){
+       const result = await test1();
+       console.log(result)
+   }
+   test2()
+</script>
+</html>
