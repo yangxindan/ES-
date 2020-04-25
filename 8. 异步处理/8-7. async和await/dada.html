@@ -32,5 +32,20 @@
        console.log(result)
    }
    test2()
+
+
+   //改造计时器函数
+   function delay(duration){
+       return new Promise((resolve, reject) => {
+           setTimeout(() => {
+               resolve()
+           }, duration);
+       })
+   }
+   async function biaobai(){
+       console.log(1);
+       await delay(500);
+       return Math.random() < 0.3;
+   }
 </script>
 </html>
